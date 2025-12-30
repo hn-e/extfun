@@ -1,9 +1,18 @@
 import clsx from "clsx";
 
 const Button = ({ id, title, rightIcon, leftIcon, containerClass }) => {
+
+  const scrollToDownload = () => {
+    const element = document.getElementById("download");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <button
       id={id}
+      onClick={scrollToDownload}
       className={clsx(
         "group relative z-10 w-fit cursor-pointer overflow-hidden rounded-full bg-violet-50 px-7 py-3 text-black",
         containerClass
