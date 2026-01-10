@@ -72,14 +72,6 @@ const NavBar = () => {
           {/* Logo and Product button */}
           <div className="flex items-center gap-7">
             <img src="/img/logo.png" alt="logo" className="w-10 rounded-lg" />
-
-            <Button
-              id="product-button"
-              title="Products"
-              leftIcon={<TiLeaf />}
-              rightIcon={<TiLeaf />}
-              containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
-            />
           </div>
 
           {/* Navigation Links and Audio Button */}

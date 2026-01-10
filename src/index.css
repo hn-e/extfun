@@ -272,26 +272,40 @@ body > div.vite-loading {
 }
 
 
-@media (max-width: 768px) {
-  /* 'redefine' top-left */
-  .hero-heading.text-blue-100 {
-    font-size: 4rem;
-    transform: rotate(-90deg);
-    transform-origin: top left; /* pivot adjusted for -90deg rotation */
-    position: absolute;
-    top: 50%;      /* distance from top in % */
-    right: 0%;     /* distance from left in % */
+@media (min-width: 768px) {
+
+  .hero-heading-rear {
+    margin-right: -1rem;
   }
 
-  /* 'PARTYING' bottom-right */
-  .hero-heading.text-blue-75,
-  .hero-heading.text-orange-500,
-  .hero-heading.text-black {
-    font-size: 4rem;
-    transform: rotate(-90deg);
-    transform-origin: top right;
+}
+
+
+@media (max-width: 768px) {
+  
+  .hero-redefine-mobile {
     position: absolute;
-    bottom: 42%;           /* distance from bottom in % */
-    right: 35%;            /* distance from right in % */
+    bottom: 5rem;
+    left: 1.25rem;
+    z-index: 40;
+  }
+
+  .hero-video-rotate {
+    position: absolute;
+    inset: 0;
+    width: 100dvh;
+    height: 100dvw;
+    transform: rotate(90deg) translateY(-100%);
+    transform-origin: top left;
+  }
+
+  .hero-video-rotate video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .rotate-video-clicker {
+    transform: rotate(90deg);
   }
 }

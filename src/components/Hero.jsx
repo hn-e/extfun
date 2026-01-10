@@ -112,41 +112,43 @@ const Hero = () => {
                   loop
                   muted
                   id="current-video"
-                  className="size-64 origin-center scale-150 object-cover object-center"
+                  className="size-64 origin-center scale-150 object-cover object-center rotate-video-clicker"
                   onLoadedData={handleVideoLoad}
                 />
               </div>
             </VideoPreview>
           </div>
 
-          <video
-            ref={nextVdRef}
-            src={getVideoSrc(currentIndex)}
-            loop
-            muted
-            id="next-video"
-            className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
-            onLoadedData={handleVideoLoad}
-          />
-          <video
-            src={getVideoSrc(
-              currentIndex === totalVideos - 1 ? 1 : currentIndex
-            )}
-            autoPlay
-            loop
-            muted
-            className="absolute left-0 top-0 size-full object-cover object-center"
-            onLoadedData={handleVideoLoad}
-          />
+          <div className="hero-video-rotate">
+            <video
+              ref={nextVdRef}
+              src={getVideoSrc(currentIndex)}
+              loop
+              muted
+              id="next-video"
+              className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
+              onLoadedData={handleVideoLoad}
+            />
+            <video
+              src={getVideoSrc(
+                currentIndex === totalVideos - 1 ? 1 : currentIndex
+              )}
+              autoPlay
+              loop
+              muted
+              className="absolute left-0 top-0 size-full object-cover object-center"
+              onLoadedData={handleVideoLoad}
+            />
+          </div>
         </div>
 
-        <h1 className=" hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
+        <h1 className="hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
           P<b>A</b>RTYING
         </h1>
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className=" hero-heading text-blue-100">
+            <h1 className="hero-heading text-blue-100 hero-redefine-mobile">
               redefi<b>n</b>e
             </h1>
 
@@ -159,13 +161,13 @@ const Hero = () => {
               title="DOWNLAOD NOW"
               leftIcon={<TiLeaf />}
               rightIcon={<TiLeaf />}
-              containerClass="bg-yellow-300 flex-center gap-1 ml-4"
+              containerClass="bg-white flex-center gap-1 ml-4"
             />
           </div>
         </div>
       </div>
 
-      <h1 className=" hero-heading absolute bottom-5 right-5 text-black">
+      <h1 className="hero-heading hero-heading-rear absolute bottom-5 right-5 text-black">
         P<b>A</b>RTYING
       </h1>
     </div>
