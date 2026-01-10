@@ -4,7 +4,6 @@ import NavBar from "./components/Navbar";
 import Features from "./components/Features";
 import Story from "./components/Story";
 import Contact from "./components/Contact";
-import Footer from "./components/Footer";
 import Download from "./components/Download";
 import { useEffect, useRef, useState } from "react";
 import { TiLeaf } from "react-icons/ti";
@@ -12,12 +11,13 @@ import { TiLeaf } from "react-icons/ti";
 function App() {
   const [loading, setLoading] = useState(true);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [closing, setClosing] = useState(false);
   const audioRef = useRef(null);
 
-  // useEffect(() => {
-  //   const t = setTimeout(() => setLoading(false), 5000);
-  //   return () => clearTimeout(t);
-  // }, []);
+  const closeOverlay = () => {
+    setClosing(true);
+    setTimeout(() => setLoading(false), 300); // match duration
+  };
 
   useEffect(() => {
     if (!audioRef.current) return;
@@ -31,12 +31,16 @@ function App() {
 
       {/* LOADING OVERLAY */}
       {loading && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-neutral-900 text-white gap-8">
+        <div
+          className={`fixed inset-0 z-50 flex flex-col items-center justify-center
+            bg-neutral-900 text-white gap-8 transition-opacity duration-300
+            ${closing ? "opacity-0" : "opacity-100"}`}
+        >
           {/* SOUND TOGGLE */}
           <button
             onClick={() => {
               setIsAudioPlaying((p) => !p);
-              setLoading(false);
+              closeOverlay();
             }}
             className={`flex items-center justify-center rounded-full border transition-all duration-200 p-44
               ${isAudioPlaying
@@ -49,11 +53,14 @@ function App() {
               {isAudioPlaying ? <TiLeaf /> : <TiLeaf color="#c2c2c2" />}
             </span>
           </button>
+          <p className="font-general text-white uppercase">
+            Enable sound for the full experience
+          </p>
 
           {/* CLOSE */}
           <button
-            onClick={() => setLoading(false)}
-            className="text-sm opacity-60 hover:opacity-100"
+            onClick={closeOverlay}
+            className="font-general uppercase text-xs text-white/30 hover:opacity-100"
           >
             Continue without sound
           </button>
