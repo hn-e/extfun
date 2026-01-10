@@ -272,15 +272,6 @@ body > div.vite-loading {
 }
 
 
-@media (min-width: 768px) {
-
-  .hero-heading-rear {
-    margin-right: -1rem;
-  }
-
-}
-
-
 @media (max-width: 768px) {
   
   .hero-redefine-mobile {

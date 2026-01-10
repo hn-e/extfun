@@ -83,7 +83,7 @@ const Hero = () => {
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
   return (
-    <div className="relative h-dvh w-screen overflow-x-hidden">
+    <div className="relative h-dvh w-screen overflow-hidden bg-black">
       {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
@@ -97,14 +97,14 @@ const Hero = () => {
 
       <div
         id="video-frame"
-        className="relative z-10 h-dvh over w-screen overflow-hidden rounded-lg bg-blue-75"
+        className="relative z-10 h-dvh over w-screen overflow-hidden rounded-lg bg-blue-75 "
       >
         <div>
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
             <VideoPreview>
               <div
                 onClick={handleMiniVdClick}
-                className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+                className="origin-center scale-50 opacity-0 overflow-hidden transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
               >
                 <video
                   ref={nextVdRef}
@@ -167,7 +167,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <h1 className="hero-heading hero-heading-rear absolute bottom-5 right-5 text-black">
+      <h1 className="hero-heading hero-heading-rear absolute bottom-5 right-5 bg-gradient-to-r  from-fuchsia-500 via-pink-500 to-red-600  bg-clip-text text-transparent">
         P<b>A</b>RTYING
       </h1>
     </div>
