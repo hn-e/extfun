@@ -6,13 +6,17 @@ import Story from "./components/Story";
 import Contact from "./components/Contact";
 import Download from "./components/Download";
 import { useEffect, useRef, useState } from "react";
-import { TiLeaf } from "react-icons/ti";
+import { TiVolume, TiVolumeUp } from "react-icons/ti";
+import { useParty } from "./context/PartyContext";
+import PartyDrawer from "./components/PartyDrawer";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [closing, setClosing] = useState(false);
   const audioRef = useRef(null);
+
+  const { party, setParty } = useParty();
 
   const closeOverlay = () => {
     setClosing(true);
@@ -32,17 +36,20 @@ function App() {
       {/* LOADING OVERLAY */}
       {loading && (
         <div
-          className={`fixed inset-0 z-50 flex flex-col items-center justify-center
+          className={`fixed inset-0 z-30 flex flex-col items-center justify-center
             bg-neutral-900 text-white gap-8 transition-opacity duration-300
             ${closing ? "opacity-0" : "opacity-100"}`}
         >
           {/* SOUND TOGGLE */}
+          <p className="font-general text-xl text-white uppercase">
+            Loading...
+          </p>
           <button
             onClick={() => {
               setIsAudioPlaying((p) => !p);
               closeOverlay();
             }}
-            className={`flex items-center justify-center rounded-full border transition-all duration-200 p-44
+            className={`flex items-center justify-center rounded-full border transition-all duration-200 p-40
               ${isAudioPlaying
                 ? "border-white text-white"
                 : "border-neutral-500 text-neutral-500"}
@@ -50,11 +57,11 @@ function App() {
           >
             {/* icon */}
             <span className="text-5xl">
-              {isAudioPlaying ? <TiLeaf /> : <TiLeaf color="#c2c2c2" />}
+              {isAudioPlaying ? <TiVolumeUp color="#fff" /> : <TiVolume color="#a0a0a0" />}
             </span>
           </button>
           <p className="font-general text-white uppercase">
-            Enable sound for the full experience
+            Enable sound for full experience
           </p>
 
           {/* CLOSE */}
@@ -62,9 +69,17 @@ function App() {
             onClick={closeOverlay}
             className="font-general uppercase text-xs text-white/30 hover:opacity-100"
           >
-            Continue without sound
+            CLOSE
           </button>
         </div>
+      )}
+
+      {/* PARTY DRAWER */}
+      {party && (
+        <PartyDrawer
+          party={party}
+          onClose={() => setParty(null)}
+        />
       )}
 
       {/* APP CONTENT */}
