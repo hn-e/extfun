@@ -6,7 +6,7 @@ import Story from "./components/Story";
 import Contact from "./components/Contact";
 import Download from "./components/Download";
 import { useEffect, useRef, useState } from "react";
-import { TiVolume, TiVolumeUp } from "react-icons/ti";
+import clsx from "clsx";
 import { useParty } from "./context/PartyContext";
 import PartyDrawer from "./components/PartyDrawer";
 
@@ -36,6 +36,10 @@ function App() {
       {/* LOADING OVERLAY */}
       {loading && (
         <div
+            onClick={() => {
+              setIsAudioPlaying((p) => !p);
+              // closeOverlay();
+            }}
           className={`fixed inset-0 z-30 flex flex-col items-center justify-center
             bg-neutral-900 text-white gap-8 transition-opacity duration-300
             ${closing ? "opacity-0" : "opacity-100"}`}
@@ -45,10 +49,6 @@ function App() {
             Loading...
           </p>
           <button
-            onClick={() => {
-              setIsAudioPlaying((p) => !p);
-              closeOverlay();
-            }}
             className={`flex items-center justify-center rounded-full border transition-all duration-200 p-40
               ${isAudioPlaying
                 ? "border-white text-white"
@@ -56,21 +56,21 @@ function App() {
               w-32 h-32`}
           >
             {/* icon */}
-            <span className="text-5xl">
-              {isAudioPlaying ? <TiVolumeUp color="#fff" /> : <TiVolume color="#a0a0a0" />}
-            </span>
+            <div className="flex items-end space-x-1 h-10">
+              {[1, 2, 3, 4].map((bar) => (
+                <div
+                  key={bar}
+                  className={clsx("indicator-line", {
+                    active: isAudioPlaying,
+                  })}
+                  style={{ animationDelay: `${bar * 0.1}s`, '--h': `${Math.random() * 20 + 2}px` }}
+                />
+              ))}
+            </div>
           </button>
           <p className="font-general text-white uppercase">
             Enable sound for full experience
           </p>
-
-          {/* CLOSE */}
-          <button
-            onClick={closeOverlay}
-            className="font-general uppercase text-xs text-white/30 hover:opacity-100"
-          >
-            CLOSE
-          </button>
         </div>
       )}
 
@@ -89,7 +89,7 @@ function App() {
           setIsAudioPlaying={setIsAudioPlaying}
           audioRef={audioRef}
         />
-        <Hero />
+        <Hero closeLoader={()=>setLoading(false)} />
         <Download />
         <About />
         <Features />

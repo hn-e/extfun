@@ -104,9 +104,7 @@ const NavBar = ({ isAudioPlaying, setIsAudioPlaying, audioRef }) => {
                   className={clsx("indicator-line", {
                     active: isAudioPlaying,
                   })}
-                  style={{
-                    animationDelay: `${bar * 0.1}s`,
-                  }}
+                  style={{ animationDelay: `${bar * 0.1}s`, '--h': `${Math.random() * 20 + 2}px` }}
                 />
               ))}
             </button>
