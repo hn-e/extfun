@@ -4,8 +4,8 @@ import { Client, Account, Functions } from 'appwrite';
 import { useParty } from '../context/PartyContext';
 
 const client = new Client()
-  .setEndpoint(import.meta.env.EXTRO_APPWRITE_ENDPOINT)
-  .setProject(import.meta.env.EXTRO_APPWRITE_PROJECT_ID);
+  .setEndpoint(import.meta.env.VITE_APPWRITE_ENDPOINT)
+  .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
 
 const account = new Account(client);
 const functions = new Functions(client);
@@ -28,7 +28,7 @@ const Inviter = () => {
         }
 
         const execution = await functions.createExecution(
-          import.meta.env.EXTRO_SENDNOTIF_FUNCTION_ID,
+          import.meta.env.VITE_SENDNOTIF_FUNCTION_ID,
           JSON.stringify({
             __action: '__party_fetch',
             partyId: partyid,
