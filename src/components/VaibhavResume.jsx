@@ -121,6 +121,14 @@ const VaibhavResume = () => {
             a college hackathon. The guy consistently almost wins everything. That
             takes its own kind of talent.
           </p>
+          <p className="mt-3 font-robert-regular text-sm text-white/50">
+            <a
+              href="mailto:vaibhav.kumar.mishra@extroverts.app"
+              className="underline transition-colors hover:text-white"
+            >
+              vaibhav.kumar.mishra@extroverts.app
+            </a>
+          </p>
         </div>
       </div>
     </div>

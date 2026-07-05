@@ -114,6 +114,14 @@ const HimanshuResume = () => {
             &ldquo;Creativity.&rdquo; Lists them on his resume. Respect the
             honesty.
           </p>
+          <p className="mt-3 font-robert-regular text-sm text-white/50">
+            <a
+              href="mailto:himanshu@extroverts.app"
+              className="underline transition-colors hover:text-white"
+            >
+              himanshu@extroverts.app
+            </a>
+          </p>
         </div>
       </div>
     </div>
