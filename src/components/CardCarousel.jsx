@@ -10,7 +10,7 @@ const CardCarousel = ({ cards, speed = 80 }) => {
   );
 
   return (
-    <section className="hero-gradient-bg flex overflow-hidden h-screen items-center">
+    <section id="events" className="hero-gradient-bg flex overflow-hidden h-screen items-center">
       <div
         className="carousel-track"
         style={{ animation: `carousel-scroll ${speed}s linear infinite` }}

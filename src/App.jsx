@@ -172,7 +172,6 @@ function App() {
         <NavBar
           isAudioPlaying={isAudioPlaying}
           setIsAudioPlaying={setIsAudioPlaying}
-          audioRef={audioRef}
         />
         <Hero closeLoader={()=>setLoading(false)} />
         <CardCarousel cards={dummyCards} />
