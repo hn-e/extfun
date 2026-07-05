@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import Inviter from './components/Inviter.jsx'
+import PrivacyPolicy from './components/PrivacyPolicy.jsx'
+import TermsConditions from './components/TermsConditions.jsx'
 import { PartyProvider } from './context/PartyContext';
 
 createRoot(document.getElementById('root')).render(
@@ -12,6 +14,8 @@ createRoot(document.getElementById('root')).render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsConditions />} />
         <Route path="/flyer/:partyid" element={<Inviter />} />
         <Route path="*" element={<App />} />
       </Routes>

@@ -6,6 +6,7 @@ import Features from "./components/Features";
 import Story from "./components/Story";
 import Contact from "./components/Contact";
 import Download from "./components/Download";
+import Footer from "./components/Footer";
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useParty } from "./context/PartyContext";
@@ -180,6 +181,7 @@ function App() {
         <Features />
         <Story />
         <Contact />
+        <Footer />
       </main>
     </>
   );
