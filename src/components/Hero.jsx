@@ -1,165 +1,101 @@
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
-import { TiLeaf } from "react-icons/ti";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { Canvas } from "@react-three/fiber";
+import EnergyWeave from "./EnergyWeave";
 
-import Button from "./Button";
-import VideoPreview from "./VideoPreview";
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.18,
+      delayChildren: 0.15,
+    },
+  },
+};
 
-gsap.registerPlugin(ScrollTrigger);
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] },
+  },
+};
 
 const Hero = ({ closeLoader }) => {
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const [hasClicked, setHasClicked] = useState(false);
-
-  // const [loading, setLoading] = useState(true);
-  const [loadedVideos, setLoadedVideos] = useState(0);
-
-  const totalVideos = 4;
-  const nextVdRef = useRef(null);
-
-  const handleVideoLoad = () => {
-    setLoadedVideos((prev) => prev + 1);
-  };
+  const mouseRef = useRef({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
-    if (loadedVideos === totalVideos - 1) {
-      closeLoader();
-    }
-  }, [loadedVideos]);
+    closeLoader();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const handleMiniVdClick = () => {
-    setHasClicked(true);
-
-    setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseRef.current = {
+      x: (e.clientX - rect.left) / rect.width,
+      y: 1 - (e.clientY - rect.top) / rect.height,
+    };
   };
 
-  useGSAP(
-    () => {
-      if (hasClicked) {
-        gsap.set("#next-video", { visibility: "visible" });
-        gsap.to("#next-video", {
-          transformOrigin: "center center",
-          scale: 1,
-          width: "100%",
-          height: "100%",
-          duration: 1,
-          ease: "power1.inOut",
-          onStart: () => nextVdRef.current.play(),
-        });
-        gsap.from("#current-video", {
-          transformOrigin: "center center",
-          scale: 0,
-          duration: 1.5,
-          ease: "power1.inOut",
-        });
-      }
-    },
-    {
-      dependencies: [currentIndex],
-      revertOnUpdate: true,
-    }
-  );
-
-  useGSAP(() => {
-    gsap.set("#video-frame", {
-      clipPath: "polygon(14% 0, 72% 0, 88% 90%, 0 95%)",
-      borderRadius: "0% 0% 40% 10%",
-    });
-    gsap.from("#video-frame", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      borderRadius: "0% 0% 0% 0%",
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: "#video-frame",
-        start: "center center",
-        end: "bottom center",
-        scrub: true,
-      },
-    });
-  });
-
-  const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
+  const scrollToDownload = (e) => {
+    e.preventDefault();
+    document.getElementById("download")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <div className="relative h-dvh w-screen overflow-hidden bg-black">
-
-      <div
-        id="video-frame"
-        className="relative z-10 h-dvh over w-screen overflow-hidden rounded-lg bg-blue-75 "
+    <div
+      className="relative h-dvh w-screen overflow-hidden hero-gradient-bg"
+      onMouseMove={handleMouseMove}
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
       >
-        <div>
-          <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
-            <VideoPreview>
-              <div
-                onClick={handleMiniVdClick}
-                className="origin-center scale-50 opacity-0 overflow-hidden transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
-              >
-                <video
-                  ref={nextVdRef}
-                  src={getVideoSrc((currentIndex % totalVideos) + 1)}
-                  loop
-                  muted
-                  id="current-video"
-                  className="size-64 origin-center scale-150 object-cover object-center rotate-video-clicker"
-                  onLoadedData={handleVideoLoad}
-                />
-              </div>
-            </VideoPreview>
-          </div>
+        <motion.h1
+          variants={itemVariants}
+          className="select-none text-4xl font-black uppercase leading-[0.9] text-white sm:text-5xl md:text-7xl lg:text-[5.5rem]"
+        >
+          No plans for
+          <br />
+          the night
+          <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-amber-400 bg-clip-text text-transparent">
+            ?
+          </span>
+        </motion.h1>
 
-          <div className="hero-video-rotate">
-            <video
-              ref={nextVdRef}
-              src={getVideoSrc(currentIndex)}
-              loop
-              muted
-              id="next-video"
-              className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
-              onLoadedData={handleVideoLoad}
-            />
-            <video
-              src={getVideoSrc(
-                currentIndex === totalVideos - 1 ? 1 : currentIndex
-              )}
-              autoPlay
-              loop
-              muted
-              className="absolute left-0 top-0 size-full object-cover object-center"
-              onLoadedData={handleVideoLoad}
-            />
-          </div>
-        </div>
+        <motion.h1
+          variants={itemVariants}
+          className="mt-3 select-none bg-gradient-to-r from-violet-400 via-pink-400 to-amber-400 bg-clip-text text-4xl font-black uppercase leading-[0.9] text-transparent sm:text-5xl md:text-7xl lg:text-[5.5rem]"
+        >
+          Perfect
+          <span className="text-amber-400">!</span>
+        </motion.h1>
 
-        <h1 className="hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
-          P<b>A</b>RTYING
-        </h1>
+        <motion.a
+          variants={itemVariants}
+          href="#download"
+          onClick={scrollToDownload}
+          className="group relative z-20 mt-14 inline-flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-pink-500 px-8 py-3.5 text-sm font-general uppercase tracking-[0.2em] text-white shadow-lg shadow-violet-500/25 transition-all duration-500 hover:scale-[1.03] hover:shadow-xl hover:shadow-violet-500/40"
+        >
+          get the app
+          <span className="text-lg transition-transform duration-300 group-hover:translate-y-0.5">
+            ↓
+          </span>
+        </motion.a>
+      </motion.div>
 
-        <div className="absolute left-0 top-0 z-40 size-full">
-          <div className="mt-24 px-5 sm:px-10">
-            <h1 className="hero-heading text-blue-100 hero-redefine-mobile">
-              redefi<b>n</b>e
-            </h1>
-
-            {/* <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
-              Enter the underlayer <br /> around you
-            </p> */}
-
-            <Button
-              id="watch-trailer"
-              title="DOWNLAOD NOW"
-              leftIcon={<TiLeaf />}
-              rightIcon={<TiLeaf />}
-              containerClass="bg-white flex-center gap-1 ml-4"
-            />
-          </div>
-        </div>
+      <div className="pointer-events-none absolute inset-0 z-20">
+        <Canvas
+          gl={{ alpha: true, antialias: true, depth: false, stencil: false }}
+          camera={{ position: [0, 0, 5], fov: 45 }}
+          dpr={[1, 2]}
+        >
+          <EnergyWeave mouse={mouseRef} />
+        </Canvas>
       </div>
-
-      <h1 className="hero-heading hero-heading-rear absolute bottom-5 right-5 bg-gradient-to-r  from-fuchsia-500 via-pink-500 to-red-600  bg-clip-text text-transparent">
-        P<b>A</b>RTYING
-      </h1>
     </div>
   );
 };

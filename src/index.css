@@ -275,35 +275,36 @@ body > div.vite-loading {
 
 
 @media (max-width: 768px) {
-  
-  .hero-redefine-mobile {
-    position: absolute;
-    bottom: 5rem;
-    left: 1.25rem;
-    z-index: 40;
-  }
-
-  .hero-video-rotate {
-    position: absolute;
-    inset: 0;
-    width: 100dvh;
-    height: 100dvw;
-    transform: rotate(90deg) translateY(-100%);
-    transform-origin: top left;
-  }
-
-  .hero-video-rotate video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .rotate-video-clicker {
-    transform: rotate(90deg);
-  }
-
   .animated-word {
     font-size: 3rem;
   }
-  
+}
+
+@keyframes hero-breathe {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+}
+
+.hero-gradient-bg {
+  background: linear-gradient(
+    135deg,
+    #0a0a1a 0%,
+    #140a2e 25%,
+    #0d0d2b 50%,
+    #15091f 75%,
+    #0a0a1a 100%
+  );
+  background-size: 400% 400%;
+  animation: hero-breathe 22s ease-in-out infinite;
 }
