@@ -308,3 +308,19 @@ body > div.vite-loading {
   background-size: 400% 400%;
   animation: hero-breathe 22s ease-in-out infinite;
 }
+
+@keyframes carousel-scroll {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  will-change: transform;
+}
