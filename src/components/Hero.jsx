@@ -87,7 +87,7 @@ const Hero = ({ closeLoader }) => {
         </motion.a>
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-0 z-20">
+      <div className="pointer-events-none absolute inset-0 z-0">
         <Canvas
           gl={{ alpha: true, antialias: true, depth: false, stencil: false }}
           camera={{ position: [0, 0, 5], fov: 45 }}
