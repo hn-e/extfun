@@ -4,13 +4,15 @@ import { useWindowScroll } from "react-use";
 import { useEffect, useRef, useState } from "react";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { TiLeaf } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 const navItems = [
-  { label: "Events", href: "#events" },
-  { label: "Download", href: "#download" },
-  { label: "Story", href: "#story" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Events", link: "#events" },
+  { label: "Download", link: "#download" },
+  { label: "Story", link: "#story" },
+  { label: "Team", link: "/team" },
+  { label: "About", link: "#about" },
+  { label: "Contact", link: "#contact" },
 ];
 
 const NavBar = ({ isAudioPlaying, setIsAudioPlaying }) => {
@@ -25,11 +27,38 @@ const NavBar = ({ isAudioPlaying, setIsAudioPlaying }) => {
     setIsAudioPlaying((prev) => !prev);
   };
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = (e, link) => {
     e.preventDefault();
     setMenuOpen(false);
-    const id = href.replace("#", "");
+    const id = link.replace("#", "");
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const isHash = (link) => link.startsWith("#");
+
+  const renderNavLink = (item) => {
+    if (isHash(item.link)) {
+      return (
+        <a
+          key={item.label}
+          href={item.link}
+          onClick={(e) => handleNavClick(e, item.link)}
+          className="nav-hover-btn"
+        >
+          {item.label}
+        </a>
+      );
+    }
+    return (
+      <Link
+        key={item.label}
+        to={item.link}
+        onClick={() => setMenuOpen(false)}
+        className="nav-hover-btn"
+      >
+        {item.label}
+      </Link>
+    );
   };
 
   useEffect(() => {
@@ -68,16 +97,7 @@ const NavBar = ({ isAudioPlaying, setIsAudioPlaying }) => {
             </div>
 
             <div className="hidden items-center gap-6 md:flex">
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className="nav-hover-btn"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {navItems.map((item) => renderNavLink(item))}
             </div>
 
             <button
@@ -123,16 +143,30 @@ const NavBar = ({ isAudioPlaying, setIsAudioPlaying }) => {
         )}
       >
         <div className="flex flex-col items-center gap-5 p-6">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className="font-general text-base uppercase tracking-wider text-white/70 transition-colors hover:text-white"
-            >
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            if (isHash(item.link)) {
+              return (
+                <a
+                  key={item.label}
+                  href={item.link}
+                  onClick={(e) => handleNavClick(e, item.link)}
+                  className="font-general text-base uppercase tracking-wider text-white/70 transition-colors hover:text-white"
+                >
+                  {item.label}
+                </a>
+              );
+            }
+            return (
+              <Link
+                key={item.label}
+                to={item.link}
+                onClick={() => setMenuOpen(false)}
+                className="font-general text-base uppercase tracking-wider text-white/70 transition-colors hover:text-white"
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </>
