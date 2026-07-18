@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
 import App from './App.jsx'
 import Inviter from './components/Inviter.jsx'
@@ -14,6 +15,7 @@ import { PartyProvider } from './context/PartyContext';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+  <HelmetProvider>
   <PartyProvider>
     <Router>
       <Routes>
@@ -29,5 +31,6 @@ createRoot(document.getElementById('root')).render(
       </Routes>
     </Router>
   </PartyProvider>
+  </HelmetProvider>
   </StrictMode>
 )

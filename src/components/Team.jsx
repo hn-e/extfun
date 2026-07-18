@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import himanshuImg from "../assets/himanshu.png";
 import vaibhavImg from "../assets/vaibhav.png";
+import SEO from "./SEO";
 
 const cofounders = [
   {
@@ -21,7 +22,13 @@ const cofounders = [
 
 const Team = () => {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <>
+      <SEO
+        title="Our Team — Extroverts"
+        description="Meet the co-founders behind Extroverts — Himanshu Soni and Vaibhav Mishra. Two people who believe going out should feel like an adventure."
+        path="/team"
+      />
+      <div className="min-h-screen bg-black text-white">
       <div className="py-16 sm:px-12 md:px-24 lg:px-40">
         <Link
           to="/"
@@ -79,7 +86,8 @@ const Team = () => {
           </Link>
         ))}
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

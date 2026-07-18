@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
+import SEO from "./SEO";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="min-h-screen bg-black px-6 py-16 text-white sm:px-12 md:px-24 lg:px-40">
+    <>
+      <SEO
+        title="Privacy Policy — Extroverts"
+        description="Learn how Extroverts collects, uses, and protects your personal data. Your privacy matters to us."
+        path="/privacy"
+      />
+      <div className="min-h-screen bg-black px-6 py-16 text-white sm:px-12 md:px-24 lg:px-40">
       <Link
         to="/"
         className="mb-12 inline-block text-sm text-white/40 transition-colors hover:text-white/80"
@@ -107,7 +114,8 @@ const PrivacyPolicy = () => {
           </p>
         </section>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

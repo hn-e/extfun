@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import vaibhavImg from "../assets/vaibhav.png";
+import SEO from "./SEO";
 
 const stats = [
   { value: "Top 0.64%", label: "Out of 3 lakh CAT test-takers" },
@@ -18,7 +19,13 @@ const achievements = [
 
 const VaibhavResume = () => {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <>
+      <SEO
+        title="Vaibhav Mishra — Extroverts"
+        description="Vaibhav Mishra, Co-founder & COO of Extroverts. Data Engineer. CAT 99.64th percentiler. Cross-functional leader."
+        path="/resume/vaibhav"
+      />
+      <div className="min-h-screen bg-black text-white">
       <div className="relative overflow-hidden">
         <img
           src={vaibhavImg}
@@ -131,7 +138,8 @@ const VaibhavResume = () => {
           </p>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

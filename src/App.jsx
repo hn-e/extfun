@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useParty } from "./context/PartyContext";
 import PartyDrawer from "./components/PartyDrawer";
+import SEO from "./components/SEO";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -115,6 +116,11 @@ function App() {
 
   return (
     <>
+      <SEO
+        title="Extroverts — Discover Parties, Meet People, Go Out"
+        description="Find spontaneous parties, meet like-minded people, and make every night an adventure. Available on App Store and Play Store."
+        path="/"
+      />
       {/* AUDIO MUST LIVE FOREVER */}
       <audio ref={audioRef} src="/audio/loop.mp3" loop />
 

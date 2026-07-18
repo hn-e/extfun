@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import himanshuImg from "../assets/himanshu.png";
+import SEO from "./SEO";
 
 const stats = [
   { value: "35K+", label: "Users across products" },
@@ -18,7 +19,13 @@ const achievements = [
 
 const HimanshuResume = () => {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <>
+      <SEO
+        title="Himanshu Soni — Extroverts"
+        description="Himanshu Soni, Co-founder & CEO of Extroverts. IIT Madras. Software Engineer. Built 3 apps with 35K+ combined users."
+        path="/resume/himanshu"
+      />
+      <div className="min-h-screen bg-black text-white">
       <div className="relative overflow-hidden">
         <img
           src={himanshuImg}
@@ -124,7 +131,8 @@ const HimanshuResume = () => {
           </p>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

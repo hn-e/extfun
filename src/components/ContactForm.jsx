@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import SEO from "./SEO";
 
 const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -10,7 +11,13 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-black px-6 py-16">
+    <>
+      <SEO
+        title="Contact Us — Extroverts"
+        description="Get in touch with the Extroverts team. Party inquiries, partnership ideas, or just say hi. We read everything."
+        path="/contact"
+      />
+      <div className="flex min-h-screen items-center justify-center bg-black px-6 py-16">
       <div className="w-full max-w-lg">
         <Link
           to="/"
@@ -94,7 +101,8 @@ const ContactForm = () => {
           </form>
         )}
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
