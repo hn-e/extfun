@@ -8,6 +8,7 @@ import Inviter from './components/Inviter.jsx'
 import PrivacyPolicy from './components/PrivacyPolicy.jsx'
 import TermsConditions from './components/TermsConditions.jsx'
 import ContactForm from './components/ContactForm.jsx'
+import DeleteAccount from './components/DeleteAccount.jsx'
 import Team from './components/Team.jsx'
 import HimanshuResume from './components/HimanshuResume.jsx'
 import VaibhavResume from './components/VaibhavResume.jsx'
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />
         <Route path="/contact" element={<ContactForm />} />
+        <Route path="/delete-account" element={<DeleteAccount />} />
         <Route path="/team" element={<Team />} />
         <Route path="/resume/himanshu" element={<HimanshuResume />} />
         <Route path="/resume/vaibhav" element={<VaibhavResume />} />
