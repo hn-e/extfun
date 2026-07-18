@@ -13,10 +13,12 @@ import DeleteAccount from './components/DeleteAccount.jsx'
 import Team from './components/Team.jsx'
 import HimanshuResume from './components/HimanshuResume.jsx'
 import VaibhavResume from './components/VaibhavResume.jsx'
+import VibeTest from './components/VibeTest.jsx'
 import { PartyProvider } from './context/PartyContext'
 
 const componentMap = {
   '/':                App,
+  '/vibe-test':       VibeTest,
   '/privacy':         PrivacyPolicy,
   '/terms':           TermsConditions,
   '/contact':         ContactForm,

@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Download from "./components/Download";
 import Footer from "./components/Footer";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { useParty } from "./context/PartyContext";
 import PartyDrawer from "./components/PartyDrawer";
@@ -212,6 +213,16 @@ function App() {
           setIsAudioPlaying={setIsAudioPlaying}
         />
         <Hero closeLoader={()=>setLoading(false)} />
+        <div className="flex justify-center bg-black py-3">
+          <Link
+            to="/vibe-test"
+            className="group flex items-center gap-2 rounded-full border border-white/10 px-5 py-2 text-sm uppercase tracking-wider text-white/40 transition-all duration-300 hover:border-violet-500/50 hover:text-white/70"
+          >
+            <span className="text-base">🎉</span>
+            <span>What&rsquo;s your party vibe?</span>
+            <span className="text-violet-400 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+          </Link>
+        </div>
         <CardCarousel cards={dummyCards} />
         <Download />
         <About />
