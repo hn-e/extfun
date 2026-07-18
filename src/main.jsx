@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
+import routes from './routes.js'
 import App from './App.jsx'
 import Inviter from './components/Inviter.jsx'
 import PrivacyPolicy from './components/PrivacyPolicy.jsx'
@@ -12,7 +13,18 @@ import DeleteAccount from './components/DeleteAccount.jsx'
 import Team from './components/Team.jsx'
 import HimanshuResume from './components/HimanshuResume.jsx'
 import VaibhavResume from './components/VaibhavResume.jsx'
-import { PartyProvider } from './context/PartyContext';
+import { PartyProvider } from './context/PartyContext'
+
+const componentMap = {
+  '/':                App,
+  '/privacy':         PrivacyPolicy,
+  '/terms':           TermsConditions,
+  '/contact':         ContactForm,
+  '/delete-account':  DeleteAccount,
+  '/team':            Team,
+  '/resume/himanshu': HimanshuResume,
+  '/resume/vaibhav':  VaibhavResume,
+}
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -20,14 +32,11 @@ createRoot(document.getElementById('root')).render(
   <PartyProvider>
     <Router>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsConditions />} />
-        <Route path="/contact" element={<ContactForm />} />
-        <Route path="/delete-account" element={<DeleteAccount />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/resume/himanshu" element={<HimanshuResume />} />
-        <Route path="/resume/vaibhav" element={<VaibhavResume />} />
+        {routes.map(route => {
+          const Component = componentMap[route.path]
+          if (!Component) return null
+          return <Route key={route.path} path={route.path} element={<Component />} />
+        })}
         <Route path="/flyer/:partyid" element={<Inviter />} />
         <Route path="*" element={<App />} />
       </Routes>
