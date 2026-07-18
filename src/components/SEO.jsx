@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 
 const BASE_URL = "https://extroverts.app";
 
-const SEO = ({ title, description, path = "", ogImage }) => {
+const SEO = ({ title, description, path = "", ogImage, schema }) => {
   const url = `${BASE_URL}${path}`;
   const image = ogImage || "/img/logo.png";
   const pageTitle = title || "Extroverts — Discover Parties, Meet People, Go Out";
@@ -26,8 +26,16 @@ const SEO = ({ title, description, path = "", ogImage }) => {
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={image} />
+
+      {schema &&
+        schema.map((item, i) => (
+          <script key={i} type="application/ld+json">
+            {JSON.stringify(item)}
+          </script>
+        ))}
     </Helmet>
   );
 };
 
+export { BASE_URL };
 export default SEO;

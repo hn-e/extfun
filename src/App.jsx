@@ -11,7 +11,8 @@ import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useParty } from "./context/PartyContext";
 import PartyDrawer from "./components/PartyDrawer";
-import SEO from "./components/SEO";
+import SEO, { BASE_URL } from "./components/SEO";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -120,7 +121,38 @@ function App() {
         title="Extroverts — Discover Parties, Meet People, Go Out"
         description="Find spontaneous parties, meet like-minded people, and make every night an adventure. Available on App Store and Play Store."
         path="/"
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Extroverts",
+            operatingSystem: "ANDROID, IOS",
+            applicationCategory: "SocialNetworkingApplication",
+            description:
+              "Discover parties, events, and meetups near you. Find like-minded people, join spontaneous hangouts, and never have a boring weekend again.",
+            url: BASE_URL,
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "5.0",
+              ratingCount: "100",
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Extroverts",
+            url: BASE_URL,
+            logo: `${BASE_URL}/img/logo.png`,
+            sameAs: [`${BASE_URL}`],
+          },
+        ]}
       />
+      <GoogleAnalytics />
       {/* AUDIO MUST LIVE FOREVER */}
       <audio ref={audioRef} src="/audio/loop.mp3" loop />
 

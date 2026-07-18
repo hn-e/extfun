@@ -1,0 +1,24 @@
+{
+  "name": "Extroverts",
+  "short_name": "Extroverts",
+  "description": "Discover parties, meet people, go out.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "icons": [
+    {
+      "src": "/ed0t.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.pro.nubpack",
+      "id": "com.pro.nubpack"
+    }
+  ],
+  "prefer_related_applications": true
+}
