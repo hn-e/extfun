@@ -1,6 +1,7 @@
 const routes = [
   { path: "/",              sitemap: { priority: "1.0", changefreq: "weekly" } },
   { path: "/vibe-test",    sitemap: { priority: "0.9", changefreq: "monthly" } },
+  { path: "/introvert-extrovert-test",  sitemap: { priority: "0.9", changefreq: "monthly" } },
   { path: "/team",          sitemap: { priority: "0.8", changefreq: "monthly" } },
   { path: "/contact",       sitemap: { priority: "0.7", changefreq: "monthly" } },
   { path: "/privacy",       sitemap: { priority: "0.3", changefreq: "yearly" } },

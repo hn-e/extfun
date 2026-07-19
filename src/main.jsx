@@ -14,11 +14,13 @@ import Team from './components/Team.jsx'
 import HimanshuResume from './components/HimanshuResume.jsx'
 import VaibhavResume from './components/VaibhavResume.jsx'
 import VibeTest from './components/VibeTest.jsx'
+import IntrovertExtrovertTest from './components/IntrovertExtrovertTest.jsx'
 import { PartyProvider } from './context/PartyContext'
 
 const componentMap = {
   '/':                App,
   '/vibe-test':       VibeTest,
+  '/introvert-extrovert-test': IntrovertExtrovertTest,
   '/privacy':         PrivacyPolicy,
   '/terms':           TermsConditions,
   '/contact':         ContactForm,
