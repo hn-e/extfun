@@ -2,33 +2,39 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import SEO from "./SEO";
 
+const FORMSPREE_URL = "https://formspree.io/f/xaqrvzra";
 const SUPPORT_EMAIL = "himanshu@extroverts.app";
 
 const DeleteAccount = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [reason, setReason] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
+    setError("");
 
-    const subject = `Account Deletion Request — ${username || email}`;
-    const body = [
-      `Hi Extroverts team,`,
-      ``,
-      `I'd like to request deletion of my account. Here are my details:`,
-      ``,
-      `Email: ${email}`,
-      `Username: ${username}`,
-      reason ? `Reason: ${reason}` : "",
-      ``,
-      `Please process this at your earliest convenience.`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ email, username, reason }),
+      });
 
-    const mailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError("Something went wrong. Please try again or email us directly.");
+      }
+    } catch {
+      setError("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -59,58 +65,86 @@ const DeleteAccount = () => {
             and send you a confirmation once it's done. No tricks, no runarounds — just a clean goodbye.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-10 space-y-5">
-            <div>
-              <label className="font-general text-xs uppercase tracking-wider text-white/40">
-                Email <span className="text-pink-400">*</span>
-              </label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-2 w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 font-robert-regular text-white placeholder-white/20 outline-none transition-colors focus:border-white/30 focus:bg-white/[0.06]"
-                placeholder="you@email.com"
-              />
-              <p className="mt-1 font-robert-regular text-xs text-white/30">
-                The email linked to your Extroverts account.
+          {submitted ? (
+            <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center backdrop-blur-sm">
+              <p className="font-general text-xl font-semibold text-white">
+                Request received
               </p>
+              <p className="mt-2 font-robert-regular text-sm text-white/40">
+                We'll verify your details, process the deletion within 2–4 business days,
+                and reply to <strong className="text-white/60">{email}</strong> to confirm.
+              </p>
+              <Link
+                to="/"
+                className="mt-6 inline-block text-sm text-violet-400 underline transition-colors hover:text-violet-300"
+              >
+                Back to home
+              </Link>
             </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="mt-10 space-y-5">
+              <div>
+                <label className="font-general text-xs uppercase tracking-wider text-white/40">
+                  Email <span className="text-pink-400">*</span>
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  disabled={submitting}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-2 w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 font-robert-regular text-white placeholder-white/20 outline-none transition-colors focus:border-white/30 focus:bg-white/[0.06] disabled:opacity-50"
+                  placeholder="you@email.com"
+                />
+                <p className="mt-1 font-robert-regular text-xs text-white/30">
+                  The email linked to your Extroverts account.
+                </p>
+              </div>
 
-            <div>
-              <label className="font-general text-xs uppercase tracking-wider text-white/40">
-                Username <span className="text-pink-400">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="mt-2 w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 font-robert-regular text-white placeholder-white/20 outline-none transition-colors focus:border-white/30 focus:bg-white/[0.06]"
-                placeholder="@username"
-              />
-            </div>
+              <div>
+                <label className="font-general text-xs uppercase tracking-wider text-white/40">
+                  Username <span className="text-pink-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={username}
+                  disabled={submitting}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="mt-2 w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 font-robert-regular text-white placeholder-white/20 outline-none transition-colors focus:border-white/30 focus:bg-white/[0.06] disabled:opacity-50"
+                  placeholder="@username"
+                />
+              </div>
 
-            <div>
-              <label className="font-general text-xs uppercase tracking-wider text-white/40">
-                Reason <span className="text-white/20">(optional)</span>
-              </label>
-              <textarea
-                rows={3}
-                value={reason}
-                onChange={(e) => setReason(e.target.value)}
-                className="mt-2 w-full resize-none rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 font-robert-regular text-white placeholder-white/20 outline-none transition-colors focus:border-white/30 focus:bg-white/[0.06]"
-                placeholder="We'd love to know what we could do better..."
-              />
-            </div>
+              <div>
+                <label className="font-general text-xs uppercase tracking-wider text-white/40">
+                  Reason <span className="text-white/20">(optional)</span>
+                </label>
+                <textarea
+                  rows={3}
+                  value={reason}
+                  disabled={submitting}
+                  onChange={(e) => setReason(e.target.value)}
+                  className="mt-2 w-full resize-none rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 font-robert-regular text-white placeholder-white/20 outline-none transition-colors focus:border-white/30 focus:bg-white/[0.06] disabled:opacity-50"
+                  placeholder="We'd love to know what we could do better..."
+                />
+              </div>
 
-            <button
-              type="submit"
-              className="w-full rounded-full bg-gradient-to-r from-violet-500 to-pink-500 py-3 font-general text-sm uppercase tracking-widest text-white shadow-lg shadow-violet-500/20 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/30"
-            >
-              Open email &amp; send request
-            </button>
-          </form>
+              {error && (
+                <p className="rounded-lg border border-red-500/20 bg-red-500/[0.06] px-4 py-3 font-robert-regular text-sm text-red-400">
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full rounded-full bg-gradient-to-r from-violet-500 to-pink-500 py-3 font-general text-sm uppercase tracking-widest text-white shadow-lg shadow-violet-500/20 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/30 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {submitting ? "Sending..." : "Submit request"}
+              </button>
+            </form>
+          )}
 
           <p className="mt-6 text-center font-robert-regular text-xs text-white/25">
             Prefer to write us directly?{" "}
@@ -129,11 +163,12 @@ const DeleteAccount = () => {
             <ol className="mt-3 space-y-2 font-robert-regular text-sm text-white/35">
               <li className="flex gap-3">
                 <span className="flex-shrink-0 font-semibold text-violet-400">1.</span>
-                Your email app opens with a pre-filled request — just hit <strong className="text-white/50">Send</strong>.
+                Hit submit and we'll receive your request instantly.
               </li>
               <li className="flex gap-3">
                 <span className="flex-shrink-0 font-semibold text-violet-400">2.</span>
-                We'll verify your request and process it within <strong className="text-white/50">2–4 business days</strong>.
+                We'll verify your details and process the deletion within{" "}
+                <strong className="text-white/50">2–4 business days</strong>.
               </li>
               <li className="flex gap-3">
                 <span className="flex-shrink-0 font-semibold text-violet-400">3.</span>
