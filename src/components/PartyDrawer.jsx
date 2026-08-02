@@ -49,10 +49,10 @@ const PartyDrawer = ({ party, onClose }) => {
           if (info.offset.y > 120) onClose();
           else controls.start({ y: 0 });
         }}
-        initial={{ y: "100%" }}
-        animate={{ y: 0 }}
-        exit={{ y: "100%" }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        // initial={{ y: "100%" }}
+        // animate={{ y: 0 }}
+        // exit={{ y: "100%" }}
+        // transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className="w-full sm:w-[420px] max-h-[90vh] rounded-t-3xl bg-black/75 backdrop-blur-xl shadow-2xl p-8 text-white overflow-hidden">
         {/* HANDLE */}
         <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-gray-400/50" />
