@@ -10,6 +10,7 @@ import PrivacyPolicy from './components/PrivacyPolicy.jsx'
 import TermsConditions from './components/TermsConditions.jsx'
 import ContactForm from './components/ContactForm.jsx'
 import DeleteAccount from './components/DeleteAccount.jsx'
+import ManageData from './components/ManageData.jsx'
 import Team from './components/Team.jsx'
 import HimanshuResume from './components/HimanshuResume.jsx'
 import VaibhavResume from './components/VaibhavResume.jsx'
@@ -25,6 +26,7 @@ const componentMap = {
   '/terms':           TermsConditions,
   '/contact':         ContactForm,
   '/delete-account':  DeleteAccount,
+  '/manage-data':     ManageData,
   '/team':            Team,
   '/resume/himanshu': HimanshuResume,
   '/resume/vaibhav':  VaibhavResume,
