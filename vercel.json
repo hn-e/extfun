@@ -19,7 +19,7 @@
         },
         {
           "key": "Content-Disposition",
-          "value": ""
+          "value": "inline"
         }
       ]
     }
