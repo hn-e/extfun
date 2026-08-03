@@ -11,6 +11,7 @@ import TermsConditions from './components/TermsConditions.jsx'
 import ContactForm from './components/ContactForm.jsx'
 import DeleteAccount from './components/DeleteAccount.jsx'
 import ManageData from './components/ManageData.jsx'
+import Support from './components/Support.jsx'
 import Team from './components/Team.jsx'
 import HimanshuResume from './components/HimanshuResume.jsx'
 import VaibhavResume from './components/VaibhavResume.jsx'
@@ -27,6 +28,7 @@ const componentMap = {
   '/contact':         ContactForm,
   '/delete-account':  DeleteAccount,
   '/manage-data':     ManageData,
+  '/support':         Support,
   '/team':            Team,
   '/resume/himanshu': HimanshuResume,
   '/resume/vaibhav':  VaibhavResume,

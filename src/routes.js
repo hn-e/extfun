@@ -8,6 +8,7 @@ const routes = [
   { path: "/terms",         sitemap: { priority: "0.3", changefreq: "yearly" } },
   { path: "/delete-account",  sitemap: { priority: "0.3", changefreq: "yearly" } },
   { path: "/manage-data",     sitemap: { priority: "0.3", changefreq: "yearly" } },
+  { path: "/support",         sitemap: { priority: "0.6", changefreq: "monthly" } },
   { path: "/resume/himanshu", sitemap: false },
   { path: "/resume/vaibhav",  sitemap: false },
   { path: "/flyer/:partyid",  sitemap: false },
